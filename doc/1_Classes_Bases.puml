@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Livre {
+    - ISBN: String
+    - titre: String
+    - anneePublication: int
+    - auteur : Auteur
+
+    + getDescription(): String
+}
+
+class Auteur {
+- nom: String
+- naissance
+- mort
+
++ getDescription(): String
+}
+
+
+Livre ->  Auteur : auteur
+Auteur -> Livre : livres*
+
+@enduml
