@@ -21,8 +21,6 @@ public class MonPremierControlleur {
         return "Hello" + nom;
     }
 
-
-
     @GetMapping("/color")
     public Color getColor(){return Color.magenta;}
 
