@@ -26,7 +26,7 @@ public class MonPremierControlleur {
 
     @GetMapping("/user")
     public User getUser(){
-        User u = new User("Fred", 10);
+        User u = new User();
         return u;
     }
 
