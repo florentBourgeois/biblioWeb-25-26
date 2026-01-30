@@ -22,4 +22,7 @@ class Auteur {
 Livre ->  Auteur : auteur
 Auteur -> Livre : livres*
 
+note "Requêtes utiles pour une bibliotèque\n- récupérer tous les livres\n- récupérer un lire (id)\n- chercher par titre\n- listes des auteurs représentés\n- récupérer un auteur (id)\n- chercher auteur (nom)\n\nPour admin : \n- connaitre liste membres\n- connaitre livres empruntés par un membre\n- est ce qu'un livre est disponble ? \n- qui a emprunté ce livre ?\n- ajouter un nouveau livre\n- emprunter un livre\n- retour livre" as N1
+
+
 @enduml

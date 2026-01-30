@@ -1,0 +1,11 @@
+###
+@baseURL = "http://localhost:8080"
+
+### hello world à la racine
+# @name base
+GET {{baseURL}}
+
+###
+GET {{baseURL}}/user
+
+
