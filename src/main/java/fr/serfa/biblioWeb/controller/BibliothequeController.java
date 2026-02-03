@@ -193,6 +193,18 @@ public class BibliothequeController {
         return livre;
     }
 
+    @PostMapping("/admin/membre/{idMembre}/emprunter/livres/{idLivre}")
+    public Livre emprunterLivre(@PathVariable int idMembre, @PathVariable int idLivre){
+        Membre m = this.membres.get(idMembre);
+        Livre l = this.livres.get(idLivre);
+        if(this.livresDisponibles().contains(l))
+            m.getEmprunts().add(l);
+        return l;
+    }
+
+
+
+
 
 
 
