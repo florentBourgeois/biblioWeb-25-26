@@ -93,13 +93,12 @@ public class BibliothequeController {
     }
 
     @GetMapping("/livres/{id}")
-    public Livre getParID(@PathVariable int id){
-        return this.getParIndex(id); // TODO faire mieux avec id
+    public ResponseEntity<Livre> getParID(@PathVariable int id){
+        if(id > livres.size())
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(this.livres.get(id));
     }
 
-    private Livre getParIndex(int id){
-        return this.livres.get(id);
-    }
 
 
     @GetMapping("/livres/titre/{titreRecherche}")
@@ -198,15 +197,15 @@ public class BibliothequeController {
         Livre l = this.livres.get(idLivre);
         if(this.livresDisponibles().contains(l)) {
             m.getEmprunts().add(l);
+            // permet de renvoyer un code 200 et le livre emprunté
             return ResponseEntity.ok(l);
         }
         Map<String, String> body = new HashMap<>();
         body.put("message","livre emprunté");
+        // permet de renvoyer un code 409 et un message à prendre en compte
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);
-
     }
-
-
+    // TODO : reprendre la route /livres/{id} et renvoyer 404 si l'id n'existe pas
 
 
 
