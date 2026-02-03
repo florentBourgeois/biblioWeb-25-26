@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 @RestController
@@ -21,13 +22,17 @@ public class BibliothequeController {
     public BibliothequeController() {
         Auteur jkr = new Auteur("J.K.Rowling", LocalDate.of(1963,1,1));
         this.auteurs.add(jkr);
+        Auteur fred = new Auteur("fred", LocalDate.of(1756,1,1));
+        this.auteurs.add(fred);
 
-        Livre harryp = new Livre(jkr, 2000, "Harry Potter", "3456776543");
+
+        Livre harryp = new Livre(jkr, 2000, "harry potter", "3456776543");
         livres.add(harryp);
-        livres.add(new Livre(jkr, 2002, "Harry Potter2", "3456776543"));
-        livres.add(new Livre(jkr, 2003, "Harry Potter3", "3456776543"));
-        livres.add(new Livre(jkr, 2007, "Harry Potter5", "3456776543"));
+        livres.add(new Livre(jkr, 2002, "harry potter2", "3456776543"));
+        livres.add(new Livre(jkr, 2003, "harry potter3", "3456776543"));
+        livres.add(new Livre(jkr, 2007, "harry potter5", "3456776543"));
 
+        livres.add(new Livre(fred, 1800, "ce livre", "345677YG"));
 
     }
 
@@ -36,7 +41,7 @@ public class BibliothequeController {
         Auteur jkr = new Auteur("J.K.Rowling", LocalDate.of(1963,1,1));
 
         Random random= new Random();
-        Livre l = new Livre(jkr,1999, "Livre ajouté en trichant" + random.nextInt(1000), "isbn"+random.nextInt(9999));
+        Livre l = new Livre(jkr,1999, "livre ajouté en trichant" + random.nextInt(1000), "isbn"+random.nextInt(9999));
         this.livres.add(l);
         return l;
     }
@@ -59,4 +64,23 @@ public class BibliothequeController {
     private Livre getParIndex(int id){
         return this.livres.get(id);
     }
+
+
+    @GetMapping("/livres/titre/{titreRecherche}")
+    public List<Livre> getParTitre(@PathVariable String titreRecherche){
+        titreRecherche = titreRecherche.toLowerCase(Locale.ROOT);
+        List<Livre> result = new ArrayList<>();
+        for (Livre l : this.livres){
+            if(l.getTitre().toLowerCase().contains(titreRecherche)){
+                result.add(l);
+            }
+        }
+        return result;
+    }
+
+
+
+
+
+
 }
