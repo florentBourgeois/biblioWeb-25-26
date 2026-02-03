@@ -141,8 +141,356 @@
       ]
     },
     {
-      "name": "New Folder",
-      "item": []
+      "name": "bibliothèque",
+      "item": [
+        {
+          "name": "ajouter cheat",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/livres/ajouterCHEAT",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "livres",
+                "ajouterCHEAT"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get premier livre",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/livres/premier",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "livres",
+                "premier"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "liste des livres",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/livres",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "livres"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "livre par id 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/livres/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "livres",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "livre par titre harry",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/livres/titre/harry",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "livres",
+                "titre",
+                "harry"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "livre par titre se",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/livres/titre/harry",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "livres",
+                "titre",
+                "harry"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "liste auteurs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/auteurs",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "auteurs"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "auteur par id 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/auteurs/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "auteurs",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "auteur par nom",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/auteurs/titre/harry",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "auteurs",
+                "titre",
+                "harry"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "admin bibliothèque",
+      "item": [
+        {
+          "name": "liste membres",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/admin/membres",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "admin",
+                "membres"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "emprunt membre 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/admin/membres/1/emprunts",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "admin",
+                "membres",
+                "1",
+                "emprunts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "livre dispo ?  1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/admin/livres/1/dispoible",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "admin",
+                "livres",
+                "1",
+                "dispoible"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "livre emprunteur ? 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/admin/livres/1/emprunteur",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "admin",
+                "livres",
+                "1",
+                "emprunteur"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ajouter livre",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"titre\" : \"Le meilleur des mondes\",\n    \"auteur\": 3,\n    \"annee\": 1999,\n    \"ISBN\": \"1234567890123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/admin/livres",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "admin",
+                "livres"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1 emprunter un livre 2",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/admin/membre/1/emprunter/livres/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "admin",
+                "membre",
+                "1",
+                "emprunter",
+                "livres",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "rendre livre 1",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/admin/livres/1/retour",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "admin",
+                "livres",
+                "1",
+                "retour"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     }
   ]
 }
