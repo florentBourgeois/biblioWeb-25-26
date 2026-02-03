@@ -47,6 +47,7 @@ public class BibliothequeController {
         livres.add(new Livre(victorhugo, 1831, "Le Bossu de Notre-Dame", "9782070409192"));
         livres.add(new Livre(victorhugo, 1856, "Les Travailleurs de la mer", "9782070409208"));
 
+        System.out.println("-------------------------------\nBibliothequeController initialisé avec " + this.livres.size() + " livres et " + this.auteurs.size() + " auteurs.\n-------------------------------");
     }
 
     @GetMapping("/livres/ajouterCHEAT")
@@ -91,6 +92,31 @@ public class BibliothequeController {
         return result;
     }
 
+
+
+    @GetMapping("/auteurs")
+    public List<Auteur>  getAuteurs(){
+        return this.auteurs;
+    }
+
+
+    @GetMapping("/auteurs/{id}")
+    public Auteur getAuteurParID(@PathVariable int id){
+        return this.auteurs.get(id);
+    }
+
+
+    @GetMapping("/auteur/nom/{nomRecherche}")
+    public List<Auteur> getAuteurParNom(@PathVariable String nomRecherche){
+        nomRecherche = nomRecherche.toLowerCase(Locale.ROOT);
+        List<Auteur> result = new ArrayList<>();
+        for (Auteur a : this.auteurs){
+            if(a.getNom().toLowerCase().contains(nomRecherche)){
+                result.add(a);
+            }
+        }
+        return result;
+    }
 
 
 
