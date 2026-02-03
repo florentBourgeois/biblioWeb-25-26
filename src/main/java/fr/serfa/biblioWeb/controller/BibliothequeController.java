@@ -106,7 +106,7 @@ public class BibliothequeController {
     }
 
 
-    @GetMapping("/auteur/nom/{nomRecherche}")
+    @GetMapping("/auteurs/nom/{nomRecherche}")
     public List<Auteur> getAuteurParNom(@PathVariable String nomRecherche){
         nomRecherche = nomRecherche.toLowerCase(Locale.ROOT);
         List<Auteur> result = new ArrayList<>();

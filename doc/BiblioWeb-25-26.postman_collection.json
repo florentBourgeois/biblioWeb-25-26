@@ -304,12 +304,12 @@
           "response": []
         },
         {
-          "name": "auteur par nom",
+          "name": "auteur par nom rowling",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/auteurs/titre/harry",
+              "raw": "http://localhost:8080/auteurs/nom/rowling",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -317,8 +317,29 @@
               "port": "8080",
               "path": [
                 "auteurs",
-                "titre",
-                "harry"
+                "nom",
+                "rowling"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "livres d'un auteur  \"rowling\"",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/auteurs/rowling/livres",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "auteurs",
+                "rowling",
+                "livres"
               ]
             }
           },
