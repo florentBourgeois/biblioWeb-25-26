@@ -24,6 +24,13 @@ public class BibliothequeController {
         this.auteurs.add(jkr);
         Auteur fred = new Auteur("fred", LocalDate.of(1756,1,1));
         this.auteurs.add(fred);
+        Auteur huxley = new Auteur("Aldous Huxley", LocalDate.of(1894,7,26), "1963-11-22");
+        this.auteurs.add(huxley);
+        Auteur orwell = new Auteur("George Orwell", LocalDate.of(1903,6,25), "1950-01-21");
+        this.auteurs.add(orwell);
+        Auteur victorhugo = new Auteur("Victor Hugo", LocalDate.of(1802,2,26), "1885-05-22");
+        this.auteurs.add(victorhugo);
+        Auteur sansLivre = new Auteur("Auteur Sans Livre", LocalDate.of(1900,1,1));
 
 
         Livre harryp = new Livre(jkr, 2000, "harry potter", "3456776543");
@@ -33,6 +40,12 @@ public class BibliothequeController {
         livres.add(new Livre(jkr, 2007, "harry potter5", "3456776543"));
 
         livres.add(new Livre(fred, 1800, "ce livre", "345677YG"));
+
+        livres.add(new Livre(huxley, 1932, "Le Meilleur des mondes", "9782266165875"));
+        livres.add(new Livre(orwell, 1949, "1984", "9780451524935"));
+        livres.add(new Livre(victorhugo, 1862, "Les Misérables", "9782070409185"));
+        livres.add(new Livre(victorhugo, 1831, "Le Bossu de Notre-Dame", "9782070409192"));
+        livres.add(new Livre(victorhugo, 1856, "Les Travailleurs de la mer", "9782070409208"));
 
     }
 
