@@ -4,9 +4,7 @@ import fr.serfa.biblioWeb.model.Auteur;
 import fr.serfa.biblioWeb.model.Livre;
 import fr.serfa.biblioWeb.model.Membre;
 import jakarta.websocket.server.PathParam;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -172,10 +170,29 @@ public class BibliothequeController {
         return result;
     }
 
-    @GetMapping("/admin/livres/1/emprunteur")
-    public Livre emprunteurDe(int idLivre){
-
+    // pourquoi ca ne marche pas ?
+    @GetMapping("/admin/livres/{idLivre}/emprunteur")
+    public Membre emprunteurDe(@PathVariable int idLivre){
+        Livre cherche = this.livres.get(idLivre);
+        for (Membre m : membres){
+            for (Livre l : livres) {
+                if (cherche == l)
+                    return m;
+            }
+        }
+        return null;
     }
+
+
+    @PostMapping("/admin/autheur/{id}/livres")
+    public Livre ajouterLivre(@PathVariable int id, @RequestBody Livre livre){
+        Auteur auteurDuLivre = this.getAuteurParID(id);
+        auteurDuLivre.getLivres().add(livre);
+        livre.setAuteur(auteurDuLivre);
+        this.livres.add(livre);
+        return livre;
+    }
+
 
 
 

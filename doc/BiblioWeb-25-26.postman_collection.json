@@ -325,12 +325,12 @@
           "response": []
         },
         {
-          "name": "livres d'un auteur  \"rowling\"",
+          "name": "livres d'un auteur 1",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/auteurs/rowling/livres",
+              "raw": "http://localhost:8080/auteurs/1/livres",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -338,7 +338,7 @@
               "port": "8080",
               "path": [
                 "auteurs",
-                "rowling",
+                "1",
                 "livres"
               ]
             }
@@ -376,7 +376,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/admin/membres/1/emprunts",
+              "raw": "http://localhost:8080/admin/membres/1/livres",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -386,19 +386,19 @@
                 "admin",
                 "membres",
                 "1",
-                "emprunts"
+                "livres"
               ]
             }
           },
           "response": []
         },
         {
-          "name": "livre dispo ?  1",
+          "name": "livres dispo",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/admin/livres/1/dispoible",
+              "raw": "http://localhost:8080/admin/livres/dispoible",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -407,7 +407,6 @@
               "path": [
                 "admin",
                 "livres",
-                "1",
                 "dispoible"
               ]
             }
@@ -437,13 +436,13 @@
           "response": []
         },
         {
-          "name": "ajouter livre",
+          "name": "ajouter livre à l'auteur 1",
           "request": {
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"titre\" : \"Le meilleur des mondes\",\n    \"auteur\": 3,\n    \"annee\": 1999,\n    \"ISBN\": \"1234567890123\"\n}",
+              "raw": "{\n    \"titre\" : \"Almanach des monstres magiques\",\n    \"anneePublication\": 2010,\n    \"isbn\": \"1234567890123\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -451,7 +450,7 @@
               }
             },
             "url": {
-              "raw": "http://localhost:8080/admin/livres",
+              "raw": "http://localhost:8080/admin/autheur/1/livres",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -459,6 +458,8 @@
               "port": "8080",
               "path": [
                 "admin",
+                "autheur",
+                "1",
                 "livres"
               ]
             }

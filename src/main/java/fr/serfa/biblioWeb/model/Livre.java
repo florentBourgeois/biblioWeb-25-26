@@ -6,6 +6,15 @@ public class Livre {
     private int anneePublication;
     private Auteur auteur;
 
+    public Livre() {
+    }
+
+    public Livre(String isbn, String titre, int anneePublication) {
+        this.isbn = isbn;
+        this.titre = titre;
+        this.anneePublication = anneePublication;
+    }
+
     public Livre(Auteur auteur, int anneePublication, String titre, String isbn) {
         this.auteur = auteur;
         this.auteur.getLivres().add(this);
@@ -29,6 +38,10 @@ public class Livre {
 
     public Auteur getAuteur() {
         return auteur;
+    }
+
+    public void setAuteur(Auteur a) {
+        this.auteur = a;
     }
 
     @Override
