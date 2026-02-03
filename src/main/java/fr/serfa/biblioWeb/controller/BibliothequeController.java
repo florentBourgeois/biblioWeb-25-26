@@ -118,6 +118,15 @@ public class BibliothequeController {
         return result;
     }
 
+    // ROUTE POUR RECUPERER TOUS LES LIVRES D'UN AUTEUR PAR SON ID
+    @GetMapping("/auteurs/{id}/livres")
+    public List<Livre> getLivreParAuteur(@PathVariable int id){
+        Auteur auteur =  this.getAuteurParID(id);
+        return auteur.getLivres();
+    }
+
+
+
 
 
 
