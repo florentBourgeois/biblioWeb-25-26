@@ -2,6 +2,7 @@ package fr.serfa.biblioWeb.controller;
 
 import fr.serfa.biblioWeb.model.Auteur;
 import fr.serfa.biblioWeb.model.Livre;
+import fr.serfa.biblioWeb.model.Membre;
 import jakarta.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ public class BibliothequeController {
 
     private List<Auteur> auteurs = new ArrayList<>();
     private List<Livre> livres = new ArrayList<>();
+    private List<Membre> membres = new ArrayList<>();
 
     public BibliothequeController() {
         Auteur jkr = new Auteur("J.K.Rowling", LocalDate.of(1963,1,1));
@@ -46,6 +48,28 @@ public class BibliothequeController {
         livres.add(new Livre(victorhugo, 1862, "Les Misérables", "9782070409185"));
         livres.add(new Livre(victorhugo, 1831, "Le Bossu de Notre-Dame", "9782070409192"));
         livres.add(new Livre(victorhugo, 1856, "Les Travailleurs de la mer", "9782070409208"));
+
+        Membre m1 = new Membre("Florent", "2001");
+        Membre m2 = new Membre("Sans Emprunt", "2020");
+        Membre m3 = new Membre("Jack", "1922");
+        Membre m4 = new Membre("Mike", "2026");
+        Membre m5 = new Membre("Harry", "2026");
+
+        m1.getEmprunts().add(livres.get(6));
+        m1.getEmprunts().add(livres.get(9));
+
+        m5.getEmprunts().add(livres.get(0));
+        m5.getEmprunts().add(livres.get(2));
+        m5.getEmprunts().add(livres.get(3));
+        m5.getEmprunts().add(livres.get(4));
+
+        this.membres.add(m1);
+        this.membres.add(m2);
+        this.membres.add(m3);
+        this.membres.add(m4);
+        this.membres.add(m5);
+
+
 
         System.out.println("-------------------------------\nBibliothequeController initialisé avec " + this.livres.size() + " livres et " + this.auteurs.size() + " auteurs.\n-------------------------------");
     }
@@ -126,6 +150,32 @@ public class BibliothequeController {
     }
 
 
+    @GetMapping("/admin/membres")
+    public List<Membre>  getMembres(){
+        return this.membres;
+    }
+
+    @GetMapping("/admin/membres/{id}/livres")
+    public List<Livre> livresEmpruntesPar(@PathVariable  int id){
+        Membre m = this.membres.get(id);
+        return m.getEmprunts();
+    }
+
+    @GetMapping ("/livres/disponibles")
+    public List<Livre> livresDisponibles(){
+        List<Livre> result = new ArrayList<>(this.livres);
+        for (Membre m : this.membres){
+            for (Livre l : m.getEmprunts()){
+                result.remove(l);
+            }
+        }
+        return result;
+    }
+
+    @GetMapping("/admin/livres/1/emprunteur")
+    public Livre emprunteurDe(int idLivre){
+
+    }
 
 
 
