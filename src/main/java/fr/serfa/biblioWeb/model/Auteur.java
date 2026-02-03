@@ -1,5 +1,7 @@
 package fr.serfa.biblioWeb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,7 @@ public class Auteur {
         return mort;
     }
 
+    @JsonIgnore
     public List<Livre> getLivres() {
         return new ArrayList<>(livres);
     }
