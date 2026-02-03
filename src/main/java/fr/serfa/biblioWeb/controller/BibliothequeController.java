@@ -4,13 +4,13 @@ import fr.serfa.biblioWeb.model.Auteur;
 import fr.serfa.biblioWeb.model.Livre;
 import fr.serfa.biblioWeb.model.Membre;
 import jakarta.websocket.server.PathParam;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
+import java.util.*;
 
 @RestController
 public class BibliothequeController {
@@ -174,9 +174,8 @@ public class BibliothequeController {
     @GetMapping("/admin/livres/{idLivre}/emprunteur")
     public Membre emprunteurDe(@PathVariable int idLivre){
         Livre cherche = this.livres.get(idLivre);
-        for (Membre m : membres){
-            for (Livre l : livres) {
-                if (cherche == l)
+        for (Membre m : this.membres){
+                if (m.getEmprunts().contains(cherche)){
                     return m;
             }
         }
@@ -193,13 +192,18 @@ public class BibliothequeController {
         return livre;
     }
 
-    @PostMapping("/admin/membre/{idMembre}/emprunter/livres/{idLivre}")
-    public Livre emprunterLivre(@PathVariable int idMembre, @PathVariable int idLivre){
+    @PatchMapping("/admin/membre/{idMembre}/emprunter/livres/{idLivre}")
+    public ResponseEntity<Object> emprunterLivre(@PathVariable int idMembre, @PathVariable int idLivre){
         Membre m = this.membres.get(idMembre);
         Livre l = this.livres.get(idLivre);
-        if(this.livresDisponibles().contains(l))
+        if(this.livresDisponibles().contains(l)) {
             m.getEmprunts().add(l);
-        return l;
+            return ResponseEntity.ok(l);
+        }
+        Map<String, String> body = new HashMap<>();
+        body.put("message","livre emprunté");
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+
     }
 
 
