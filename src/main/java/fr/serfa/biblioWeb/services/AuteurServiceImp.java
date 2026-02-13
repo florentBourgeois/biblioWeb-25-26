@@ -1,5 +1,6 @@
 package fr.serfa.biblioWeb.services;
 
+import fr.serfa.biblioWeb.dao.AuteurDAO;
 import fr.serfa.biblioWeb.model.Auteur;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -10,24 +11,27 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 
-@Component @Qualifier
+@Component @Primary
 public class AuteurServiceImp implements AuteurService{
 
-    private List<Auteur> auteurs = new ArrayList<>();
+    private AuteurDAO auteurDAO;
 
-    public AuteurServiceImp() {
+    public AuteurServiceImp(AuteurDAO auteurDAO) {
+        this.auteurDAO = auteurDAO;
+
         Auteur jkr = new Auteur("J.K.Rowling", LocalDate.of(1963,1,1));
-        this.auteurs.add(jkr);
+        this.auteurDAO.add(jkr);
         Auteur fred = new Auteur("fred", LocalDate.of(1756,1,1));
-        this.auteurs.add(fred);
+        this.auteurDAO.add(fred);
         Auteur huxley = new Auteur("Aldous Huxley", LocalDate.of(1894,7,26), "1963-11-22");
-        this.auteurs.add(huxley);
+        this.auteurDAO.add(huxley);
         Auteur orwell = new Auteur("George Orwell", LocalDate.of(1903,6,25), "1950-01-21");
-        this.auteurs.add(orwell);
+        this.auteurDAO.add(orwell);
         Auteur victorhugo = new Auteur("Victor Hugo", LocalDate.of(1802,2,26), "1885-05-22");
-        this.auteurs.add(victorhugo);
+        this.auteurDAO.add(victorhugo);
         Auteur sansLivre = new Auteur("Auteur Sans Livre", LocalDate.of(1900,1,1));
     }
 
@@ -38,28 +42,34 @@ public class AuteurServiceImp implements AuteurService{
 
     @Override
     public List<Auteur> consulterLesAuteurs() {
-        return this.auteurs;
+        return this.auteurDAO.findAll();
     }
 
     @Override
     public Auteur detailsAuteur(int id) {
-        return this.auteurs.get(id);
+        return this.auteurDAO.findByID(id);
     }
 
     @Override
     public List<Auteur> rechercheParNom(String nom) {
         nom = nom.toLowerCase(Locale.ROOT);
         List<Auteur> result = new ArrayList<>();
-        for (Auteur a : this.auteurs){
+        for (Auteur a : this.auteurDAO.findAll()){
             if(a.getNom().toLowerCase().contains(nom)){
                 result.add(a);
             }
         }
+
         return result;
+    }
+
+    public List<Auteur> rechercheParNomDansDAO(String nom) {
+        nom = nom.toLowerCase(Locale.ROOT);
+        return this.auteurDAO.findBytNom(nom);
     }
 
     @Override
     public int nombreAuteurs() {
-        return this.auteurs.size();
+        return this.auteurDAO.size();
     }
 }
