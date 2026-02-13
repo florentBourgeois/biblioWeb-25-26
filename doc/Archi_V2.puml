@@ -1,0 +1,59 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+class BibliothequeController{
+
+}
+note top : "BibliothequeController utilise un service dédié à la gestion des auteurs.\n il gere les endpoints\n il délègue la logique metier (e.g. rendre ou emprunter un livre)\n " as N2
+
+BibliothequeController -> Livre :"*"
+BibliothequeController --> AuteurService
+BibliothequeController-> Membre :"*"
+
+interface AuteurService{
+     void ajouterAuteur(String nom, String dateNaissance, String dateDeces);
+     List<Auteur> consulterLesAuteurs();
+     Auteur detailsAuteur(int id);
+    List<Auteur> rechercheParNom(String );
+    int nombreAuteurs();
+}
+
+note top : "AuteurService maitrise la logique métier\n mais il stocke aussi les données" as N3
+
+
+AuteurService --> Auteur : "*"
+
+
+class Livre {
+    - ISBN: String
+    - titre: String
+    - anneePublication: int
+    - auteur : Auteur
+
+    + getDescription(): String
+}
+
+class Auteur {
+- nom: String
+- naissance
+- mort
+
++ getDescription(): String
+}
+
+class Membre {
+    nom: String
+    dateAbonnement : String
+}
+
+
+Livre ->  Auteur : auteur
+Auteur -> Livre : livres*
+
+Livre <-- Membre : emprunts*
+
+note "Requêtes utiles pour une bibliotèque\n- récupérer tous les livres\n- récupérer un lire (id)\n- chercher par titre\n- listes des auteurs représentés\n- récupérer un auteur (id)\n- chercher auteur (nom)\n- récupérer la liste des livres d'un auteur\n\nPour admin : \n- connaitre liste membres\n- connaitre livres empruntés par un membre\n- liste des livres disponibles ? \n- qui a emprunté ce livre ?\n- ajouter un nouveau livre\n- emprunter un livre\n- retour livre" as N1
+
+
+@enduml

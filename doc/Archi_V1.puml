@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+class BibliothequeController{
+
+}
+note top : "BibliothequeController fait TOUT.\n il gere les endpoints\n il fait la logique metier (e.g. rendre ou emprunter un livre)\n il stocke les données avec les 3 listes. \n\n ce n'est pas maintenable" as N2
+
+BibliothequeController-> Livre :"*"
+BibliothequeController-> Auteur :"*"
+BibliothequeController-> Membre :"*"
+
+class Livre {
+    - ISBN: String
+    - titre: String
+    - anneePublication: int
+    - auteur : Auteur
+
+    + getDescription(): String
+}
+
+class Auteur {
+- nom: String
+- naissance
+- mort
+
++ getDescription(): String
+}
+
+class Membre {
+    nom: String
+    dateAbonnement : String
+}
+
+
+Livre ->  Auteur : auteur
+Auteur -> Livre : livres*
+
+Livre <-- Membre : emprunts*
+
+note "Requêtes utiles pour une bibliotèque\n- récupérer tous les livres\n- récupérer un lire (id)\n- chercher par titre\n- listes des auteurs représentés\n- récupérer un auteur (id)\n- chercher auteur (nom)\n- récupérer la liste des livres d'un auteur\n\nPour admin : \n- connaitre liste membres\n- connaitre livres empruntés par un membre\n- liste des livres disponibles ? \n- qui a emprunté ce livre ?\n- ajouter un nouveau livre\n- emprunter un livre\n- retour livre" as N1
+
+
+@enduml
