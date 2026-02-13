@@ -19,10 +19,22 @@ interface AuteurService{
     int nombreAuteurs();
 }
 
-note top : AuteurService maitrise la logique métier\n mais il stocke aussi les données
+note left : AuteurService maitrise la logique métier\n et délèque le stockage à  auteurDAO\n il sauvegarde, accede à l'inforamtion\nIl n'est pas interssé par COMMENT c'est fait
 
+AuteurService --> AuteurDAO
 
-AuteurService --> Auteur : "*"
+interface AuteurDAO{
+     void add(Auteur a);
+     List<Auteur> findAll();
+     Auteur findByID(int id);
+    // Optional<Auteur> maybeFindByID(int id);
+
+      int size();
+
+      List<Auteur> findBytNom(String nom);
+}
+
+note left : AuteurDAO a pour but de gérer le stockage de l'information\n il peut être réalisé par différentres implémentation techniques\nList, fichier, SQL, noSQL, API ...
 
 
 class Livre {
