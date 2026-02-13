@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+
+  mariadb:
+    container_name: LPDAOO-bdd
+    build:
+      context: BDD
+      dockerfile: Dockerfile
+    volumes:
+      - ./BDD/data:/var/lib/mysql:z
+    env_file:
+      - ./.env
+    ports:
+      - ${MYSQL_PORT}:3306
+
+  adminer:
+    container_name: LPDAOO-adminer
+    image: adminer
+    depends_on:
+      - mariadb
+    ports:
+      - ${PORT_ADMINER}:8080
