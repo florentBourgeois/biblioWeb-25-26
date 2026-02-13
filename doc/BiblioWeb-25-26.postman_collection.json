@@ -208,7 +208,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/livres/1",
+              "raw": "http://localhost:8080/livres/100",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -216,7 +216,7 @@
               "port": "8080",
               "path": [
                 "livres",
-                "1"
+                "100"
               ]
             }
           },
@@ -228,7 +228,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/livres/titre/harry",
+              "raw": "http://localhost:8080/livres/titre/r3",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -237,7 +237,7 @@
               "path": [
                 "livres",
                 "titre",
-                "harry"
+                "r3"
               ]
             }
           },
@@ -330,7 +330,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/auteurs/1/livres",
+              "raw": "http://localhost:8080/auteurs/0/livres",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -338,7 +338,7 @@
               "port": "8080",
               "path": [
                 "auteurs",
-                "1",
+                "0",
                 "livres"
               ]
             }
@@ -376,7 +376,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/admin/membres/1/livres",
+              "raw": "http://localhost:8080/admin/membres/0/livres",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -385,7 +385,7 @@
               "path": [
                 "admin",
                 "membres",
-                "1",
+                "0",
                 "livres"
               ]
             }
@@ -472,7 +472,7 @@
             "method": "PATCH",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/admin/membre/1/emprunter/livres/2",
+              "raw": "http://localhost:8080/admin/membre/1/emprunter/livres/7",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -484,7 +484,7 @@
                 "1",
                 "emprunter",
                 "livres",
-                "2"
+                "7"
               ]
             }
           },

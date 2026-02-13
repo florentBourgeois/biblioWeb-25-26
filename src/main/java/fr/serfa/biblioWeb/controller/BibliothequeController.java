@@ -3,7 +3,10 @@ package fr.serfa.biblioWeb.controller;
 import fr.serfa.biblioWeb.model.Auteur;
 import fr.serfa.biblioWeb.model.Livre;
 import fr.serfa.biblioWeb.model.Membre;
+import fr.serfa.biblioWeb.services.AuteurService;
+import fr.serfa.biblioWeb.services.AuteurServiceImp;
 import jakarta.websocket.server.PathParam;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -15,37 +18,29 @@ import java.util.*;
 @RestController
 public class BibliothequeController {
 
-    private List<Auteur> auteurs = new ArrayList<>();
+
+    private AuteurService auteurService ;
     private List<Livre> livres = new ArrayList<>();
     private List<Membre> membres = new ArrayList<>();
 
-    public BibliothequeController() {
-        Auteur jkr = new Auteur("J.K.Rowling", LocalDate.of(1963,1,1));
-        this.auteurs.add(jkr);
-        Auteur fred = new Auteur("fred", LocalDate.of(1756,1,1));
-        this.auteurs.add(fred);
-        Auteur huxley = new Auteur("Aldous Huxley", LocalDate.of(1894,7,26), "1963-11-22");
-        this.auteurs.add(huxley);
-        Auteur orwell = new Auteur("George Orwell", LocalDate.of(1903,6,25), "1950-01-21");
-        this.auteurs.add(orwell);
-        Auteur victorhugo = new Auteur("Victor Hugo", LocalDate.of(1802,2,26), "1885-05-22");
-        this.auteurs.add(victorhugo);
-        Auteur sansLivre = new Auteur("Auteur Sans Livre", LocalDate.of(1900,1,1));
+    public BibliothequeController(AuteurService auteurService) {
+        this.auteurService = auteurService;
 
-
+        Auteur jkr = auteurService.detailsAuteur(0);
         Livre harryp = new Livre(jkr, 2000, "harry potter", "3456776543");
         livres.add(harryp);
         livres.add(new Livre(jkr, 2002, "harry potter2", "3456776543"));
         livres.add(new Livre(jkr, 2003, "harry potter3", "3456776543"));
         livres.add(new Livre(jkr, 2007, "harry potter5", "3456776543"));
 
+        Auteur fred = auteurService.detailsAuteur(1);
         livres.add(new Livre(fred, 1800, "ce livre", "345677YG"));
 
-        livres.add(new Livre(huxley, 1932, "Le Meilleur des mondes", "9782266165875"));
-        livres.add(new Livre(orwell, 1949, "1984", "9780451524935"));
-        livres.add(new Livre(victorhugo, 1862, "Les Misérables", "9782070409185"));
-        livres.add(new Livre(victorhugo, 1831, "Le Bossu de Notre-Dame", "9782070409192"));
-        livres.add(new Livre(victorhugo, 1856, "Les Travailleurs de la mer", "9782070409208"));
+        livres.add(new Livre(auteurService.detailsAuteur(2), 1932, "Le Meilleur des mondes", "9782266165875"));
+        livres.add(new Livre(auteurService.detailsAuteur(3), 1949, "1984", "9780451524935"));
+        livres.add(new Livre(auteurService.detailsAuteur(4), 1862, "Les Misérables", "9782070409185"));
+        livres.add(new Livre(auteurService.detailsAuteur(4), 1831, "Le Bossu de Notre-Dame", "9782070409192"));
+        livres.add(new Livre(auteurService.detailsAuteur(4), 1856, "Les Travailleurs de la mer", "9782070409208"));
 
         Membre m1 = new Membre("Florent", "2001");
         Membre m2 = new Membre("Sans Emprunt", "2020");
@@ -69,7 +64,7 @@ public class BibliothequeController {
 
 
 
-        System.out.println("-------------------------------\nBibliothequeController initialisé avec " + this.livres.size() + " livres et " + this.auteurs.size() + " auteurs.\n-------------------------------");
+        System.out.println("-------------------------------\nBibliothequeController initialisé avec " + this.livres.size() + " livres et " + this.auteurService.nombreAuteurs() + " auteurs.\n-------------------------------");
     }
 
     @GetMapping("/livres/ajouterCHEAT")
@@ -117,26 +112,19 @@ public class BibliothequeController {
 
     @GetMapping("/auteurs")
     public List<Auteur>  getAuteurs(){
-        return this.auteurs;
+        return this.auteurService.consulterLesAuteurs();
     }
 
 
     @GetMapping("/auteurs/{id}")
     public Auteur getAuteurParID(@PathVariable int id){
-        return this.auteurs.get(id);
+        return this.auteurService.detailsAuteur(id);
     }
 
 
     @GetMapping("/auteurs/nom/{nomRecherche}")
     public List<Auteur> getAuteurParNom(@PathVariable String nomRecherche){
-        nomRecherche = nomRecherche.toLowerCase(Locale.ROOT);
-        List<Auteur> result = new ArrayList<>();
-        for (Auteur a : this.auteurs){
-            if(a.getNom().toLowerCase().contains(nomRecherche)){
-                result.add(a);
-            }
-        }
-        return result;
+        return this.auteurService.rechercheParNom(nomRecherche);
     }
 
     // ROUTE POUR RECUPERER TOUS LES LIVRES D'UN AUTEUR PAR SON ID
