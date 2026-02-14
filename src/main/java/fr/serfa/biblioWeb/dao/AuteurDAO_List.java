@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 public class AuteurDAO_List implements AuteurDAO{
 
     private List<Auteur> auteurs = new ArrayList<>();
@@ -23,7 +22,7 @@ public class AuteurDAO_List implements AuteurDAO{
     }
 
     @Override
-    public Auteur findByID(int id) {
+    public Auteur findById(int id) {
         return this.auteurs.get(id);
     }
 
@@ -33,7 +32,7 @@ public class AuteurDAO_List implements AuteurDAO{
     }
 
     @Override
-    public List<Auteur> findBytNom(String nom) {
+    public List<Auteur> findByNom(String nom) {
         List<Auteur> result = new ArrayList<>();
         for (Auteur a : this.auteurs){
             if(a.getNom().toLowerCase().contains(nom)){

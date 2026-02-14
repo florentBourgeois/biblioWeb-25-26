@@ -25,8 +25,8 @@ public class BibliothequeController {
 
     public BibliothequeController(AuteurService auteurService) {
         this.auteurService = auteurService;
-
-        Auteur jkr = auteurService.detailsAuteur(0);
+        /*
+        Auteur jkr = auteurService.detailsAuteur(1);
         Livre harryp = new Livre(jkr, 2000, "harry potter", "3456776543");
         livres.add(harryp);
         livres.add(new Livre(jkr, 2002, "harry potter2", "3456776543"));
@@ -62,7 +62,7 @@ public class BibliothequeController {
         this.membres.add(m4);
         this.membres.add(m5);
 
-
+        */
 
         System.out.println("-------------------------------\nBibliothequeController initialisé avec " + this.livres.size() + " livres et " + this.auteurService.nombreAuteurs() + " auteurs.\n-------------------------------");
     }

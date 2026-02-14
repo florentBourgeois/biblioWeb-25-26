@@ -1,10 +1,29 @@
 package fr.serfa.biblioWeb.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Livre {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
+    private Long id;
+
     private String isbn;
     private String titre;
     private int anneePublication;
+
+    @ManyToOne
+    @JoinColumn(name = "auteur_ID")
     private Auteur auteur;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Livre() {
     }

@@ -2,8 +2,6 @@ package fr.serfa.biblioWeb.services;
 
 import fr.serfa.biblioWeb.dao.AuteurDAO;
 import fr.serfa.biblioWeb.model.Auteur;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +9,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 
 
 @Component @Primary
@@ -33,11 +30,12 @@ public class AuteurServiceImp implements AuteurService{
         Auteur victorhugo = new Auteur("Victor Hugo", LocalDate.of(1802,2,26), "1885-05-22");
         this.auteurDAO.add(victorhugo);
         Auteur sansLivre = new Auteur("Auteur Sans Livre", LocalDate.of(1900,1,1));
+
     }
 
     @Override
     public void ajouterAuteur(String nom, String dateNaissance, String dateDeces) {
-        
+
     }
 
     @Override
@@ -47,7 +45,7 @@ public class AuteurServiceImp implements AuteurService{
 
     @Override
     public Auteur detailsAuteur(int id) {
-        return this.auteurDAO.findByID(id);
+        return this.auteurDAO.findById(id);
     }
 
     @Override
@@ -65,7 +63,7 @@ public class AuteurServiceImp implements AuteurService{
 
     public List<Auteur> rechercheParNomDansDAO(String nom) {
         nom = nom.toLowerCase(Locale.ROOT);
-        return this.auteurDAO.findBytNom(nom);
+        return this.auteurDAO.findByNom(nom);
     }
 
     @Override

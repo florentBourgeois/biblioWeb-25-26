@@ -1,17 +1,30 @@
 package fr.serfa.biblioWeb.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Auteur {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String nom;
     private LocalDate naissance;
     private String mort;
+
+    @OneToMany(mappedBy = "auteur", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Livre> livres = new ArrayList();
+
+
+    public Auteur(){
+
+    }
 
     public Auteur(String nom, LocalDate naissance) {
         this.nom = nom;
@@ -22,6 +35,14 @@ public class Auteur {
         this.nom = nom;
         this.naissance = naissance;
         this.mort = mort;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setMort(String mort) {
@@ -38,6 +59,10 @@ public class Auteur {
 
     public String getMort() {
         return mort;
+    }
+
+    public int getNbrLivres() {
+        return this.livres.size();
     }
 
     @JsonIgnore
