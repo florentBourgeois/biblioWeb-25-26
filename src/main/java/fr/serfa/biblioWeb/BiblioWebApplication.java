@@ -1,6 +1,7 @@
 package fr.serfa.biblioWeb;
 
 import fr.serfa.biblioWeb.dao.AuteurDAO;
+import fr.serfa.biblioWeb.manga.dao.LivreDAO;
 import fr.serfa.biblioWeb.model.Auteur;
 import fr.serfa.biblioWeb.model.Livre;
 import net.datafaker.Faker;
@@ -21,7 +22,7 @@ public class BiblioWebApplication {
 
 
 	@Bean
-	CommandLineRunner initRepos(AuteurDAO auteurDAO) {
+	CommandLineRunner initRepos(AuteurDAO auteurDAO, LivreDAO livreDAO) {
 		return args -> {
 			//Faker faker = new Faker(Locale.FRENCH); // pour passer faker en francais (mais moins de données dispo)
 			Faker faker = new Faker();
@@ -53,6 +54,17 @@ public class BiblioWebApplication {
 					a = new Auteur(faker.book().author(), LocalDate.of(faker.number().numberBetween(1700, 2000),1,1), String.valueOf(faker.number().numberBetween(1990, 2026)));
 				auteurDAO.add(a);
 			}
+
+			Livre l = new Livre(jkr, 1982, "mon livre", "azeazea");
+			livreDAO.save(l);
+			Livre harryp = new Livre(jkr, 2000, "harry potter", "3456776543");
+			livreDAO.save(harryp);
+			livreDAO.save(new Livre(jkr, 2002, "harry potter2", "3456776543"));
+			livreDAO.save(new Livre(jkr, 2003, "harry potter3", "3456776543"));
+			livreDAO.save(new Livre(jkr, 2007, "harry potter5", "3456776543"));
+
+			livreDAO.save(new Livre(fred, 1800, "ce livre", "345677YG"));
+
 
 
 
