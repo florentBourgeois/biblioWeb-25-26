@@ -5,6 +5,7 @@ import fr.serfa.biblioWeb.model.Livre;
 import fr.serfa.biblioWeb.model.Membre;
 import fr.serfa.biblioWeb.services.AuteurService;
 import fr.serfa.biblioWeb.services.AuteurServiceImp;
+import fr.serfa.biblioWeb.services.LivreService;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -20,11 +21,12 @@ public class BibliothequeController {
 
 
     private AuteurService auteurService ;
-    private List<Livre> livres = new ArrayList<>();
+    private LivreService livreService;
     private List<Membre> membres = new ArrayList<>();
 
-    public BibliothequeController(AuteurService auteurService) {
+    public BibliothequeController(AuteurService auteurService, LivreService livreService) {
         this.auteurService = auteurService;
+        this.livreService = livreService;
         /*
         Auteur jkr = auteurService.detailsAuteur(1);
         Livre harryp = new Livre(jkr, 2000, "harry potter", "3456776543");
@@ -64,48 +66,38 @@ public class BibliothequeController {
 
         */
 
-        System.out.println("-------------------------------\nBibliothequeController initialisé avec " + this.livres.size() + " livres et " + this.auteurService.nombreAuteurs() + " auteurs.\n-------------------------------");
+        System.out.println("-------------------------------\nBibliothequeController initialisé avec " + this.livreService.getNumberLivres() + " livres et " + this.auteurService.nombreAuteurs() + " auteurs.\n-------------------------------");
     }
 
     @GetMapping("/livres/ajouterCHEAT")
     public Livre ajouterLivreMagique() {
-        Auteur jkr = new Auteur("J.K.Rowling", LocalDate.of(1963,1,1));
-
-        Random random= new Random();
-        Livre l = new Livre(jkr,1999, "livre ajouté en trichant" + random.nextInt(1000), "isbn"+random.nextInt(9999));
-        this.livres.add(l);
-        return l;
+        return this.livreService.creerRandom();
     }
 
     @GetMapping("/livres/premier")
     public Livre getPremierLivre(){
-        return this.livres.getFirst();
+        return this.livreService.getFirst();
     }
 
     @GetMapping("/livres")
     public List<Livre>  getLivres(){
-        return this.livres;
+        return this.livreService.getAll();
     }
 
     @GetMapping("/livres/{id}")
-    public ResponseEntity<Livre> getParID(@PathVariable int id){
-        if(id > livres.size())
+    public ResponseEntity<Livre> getParID(@PathVariable Long id){
+        Livre l = this.livreService.getById(id);
+
+        if(l == null)
             return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(this.livres.get(id));
+        return ResponseEntity.ok(l);
     }
 
 
 
     @GetMapping("/livres/titre/{titreRecherche}")
     public List<Livre> getParTitre(@PathVariable String titreRecherche){
-        titreRecherche = titreRecherche.toLowerCase(Locale.ROOT);
-        List<Livre> result = new ArrayList<>();
-        for (Livre l : this.livres){
-            if(l.getTitre().toLowerCase().contains(titreRecherche)){
-                result.add(l);
-            }
-        }
-        return result;
+       return  this.livreService.getByTitre(titreRecherche);
     }
 
 
@@ -148,7 +140,8 @@ public class BibliothequeController {
 
     @GetMapping ("/livres/disponibles")
     public List<Livre> livresDisponibles(){
-        List<Livre> result = new ArrayList<>(this.livres);
+        //TODO a mettre dans le service
+        List<Livre> result = new ArrayList<>();
         for (Membre m : this.membres){
             for (Livre l : m.getEmprunts()){
                 result.remove(l);
@@ -160,28 +153,34 @@ public class BibliothequeController {
     // pourquoi ca ne marche pas ?
     @GetMapping("/admin/livres/{idLivre}/emprunteur")
     public Membre emprunteurDe(@PathVariable int idLivre){
-        Livre cherche = this.livres.get(idLivre);
+        //TODO a mettre dnas le service
+        /*Livre cherche = this.livres.get(idLivre);
         for (Membre m : this.membres){
                 if (m.getEmprunts().contains(cherche)){
                     return m;
             }
-        }
+        }*/
         return null;
     }
 
 
     @PostMapping("/admin/autheur/{id}/livres")
     public Livre ajouterLivre(@PathVariable int id, @RequestBody Livre livre){
+        //TODO a mettre dnas le service
+    /*
         Auteur auteurDuLivre = this.getAuteurParID(id);
         auteurDuLivre.getLivres().add(livre);
         livre.setAuteur(auteurDuLivre);
         this.livres.add(livre);
         return livre;
+        */
+        return null;
     }
 
     @PatchMapping("/admin/membre/{idMembre}/emprunter/livres/{idLivre}")
     public ResponseEntity<Object> emprunterLivre(@PathVariable int idMembre, @PathVariable int idLivre){
-        Membre m = this.membres.get(idMembre);
+        //TODO a mettre dnas le service
+/*        Membre m = this.membres.get(idMembre);
         Livre l = this.livres.get(idLivre);
         if(this.livresDisponibles().contains(l)) {
             m.getEmprunts().add(l);
@@ -192,6 +191,9 @@ public class BibliothequeController {
         body.put("message","livre emprunté");
         // permet de renvoyer un code 409 et un message à prendre en compte
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+        */
+
+        return null;
     }
     // TODO : reprendre la route /livres/{id} et renvoyer 404 si l'id n'existe pas
 

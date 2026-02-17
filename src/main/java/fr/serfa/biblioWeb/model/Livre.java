@@ -36,8 +36,8 @@ public class Livre {
 
     public Livre(Auteur auteur, int anneePublication, String titre, String isbn) {
         this.auteur = auteur;
-        this.auteur.getLivres().add(this);
-        this.auteur.addLivre(this);
+        if(auteur != null)
+            this.auteur.addLivre(this);
         this.anneePublication = anneePublication;
         this.titre = titre;
         this.isbn = isbn;

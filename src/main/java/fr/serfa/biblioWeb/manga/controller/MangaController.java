@@ -20,6 +20,7 @@ public class MangaController {
         mangaDAO.save(new Manga(null, "solo leveling",10,20,15));
 
 
+
     }
 
     @GetMapping()
