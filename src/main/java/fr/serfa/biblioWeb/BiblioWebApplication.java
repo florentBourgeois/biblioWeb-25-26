@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
+import java.util.Locale;
 
 @SpringBootApplication
 public class BiblioWebApplication {
@@ -22,7 +23,12 @@ public class BiblioWebApplication {
 	@Bean
 	CommandLineRunner initRepos(AuteurDAO auteurDAO) {
 		return args -> {
+			//Faker faker = new Faker(Locale.FRENCH); // pour passer faker en francais (mais moins de données dispo)
 			Faker faker = new Faker();
+			for (int i = 0; i < 10; i++) {
+				System.out.println(faker.book().title());
+
+			}
 
 			System.out.println("\n\nInitialisation du projet\n---------------");
 
