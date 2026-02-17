@@ -2,6 +2,7 @@ package fr.serfa.biblioWeb;
 
 import fr.serfa.biblioWeb.dao.AuteurDAO;
 import fr.serfa.biblioWeb.model.Auteur;
+import fr.serfa.biblioWeb.model.Livre;
 import net.datafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -38,7 +39,7 @@ public class BiblioWebApplication {
 			auteurDAO.add(victorhugo);
 			Auteur sansLivre = new Auteur("Auteur Sans Livre", LocalDate.of(1900,1,1));
 
-			for (int i = 0; i < 50; i++) {
+			for (int i = 0; i < 5; i++) {
 				Auteur a ;
 				if(faker.number().numberBetween(0,1) == 0)
 					a = new Auteur(faker.book().author(), LocalDate.of(faker.number().numberBetween(1700, 2000),1,1));
@@ -46,7 +47,6 @@ public class BiblioWebApplication {
 					a = new Auteur(faker.book().author(), LocalDate.of(faker.number().numberBetween(1700, 2000),1,1), String.valueOf(faker.number().numberBetween(1990, 2026)));
 				auteurDAO.add(a);
 			}
-
 
 
 
