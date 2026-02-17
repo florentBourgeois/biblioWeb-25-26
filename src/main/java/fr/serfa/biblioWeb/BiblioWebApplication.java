@@ -65,6 +65,14 @@ public class BiblioWebApplication {
 
 			livreDAO.save(new Livre(fred, 1800, "ce livre", "345677YG"));
 
+			livreDAO.save(new Livre(huxley, 1932, "Le Meilleur des mondes", "9782266165875"));
+			livreDAO.save(new Livre(orwell, 1949, "1984", "9780451524935"));
+			livreDAO.save(new Livre(victorhugo, 1862, "Les Misérables", "9782070409185"));
+			livreDAO.save(new Livre(victorhugo, 1831, "Le Bossu de Notre-Dame", "9782070409192"));
+			livreDAO.save(new Livre(victorhugo, 1856, "Les Travailleurs de la mer", "9782070409208"));
+
+
+
 
 
 
