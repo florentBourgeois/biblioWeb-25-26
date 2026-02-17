@@ -19,18 +19,6 @@ public class AuteurServiceImp implements AuteurService{
     public AuteurServiceImp(AuteurDAO auteurDAO) {
         this.auteurDAO = auteurDAO;
 
-        Auteur jkr = new Auteur("J.K.Rowling", LocalDate.of(1963,1,1));
-        this.auteurDAO.add(jkr);
-        Auteur fred = new Auteur("fred", LocalDate.of(1756,1,1));
-        this.auteurDAO.add(fred);
-        Auteur huxley = new Auteur("Aldous Huxley", LocalDate.of(1894,7,26), "1963-11-22");
-        this.auteurDAO.add(huxley);
-        Auteur orwell = new Auteur("George Orwell", LocalDate.of(1903,6,25), "1950-01-21");
-        this.auteurDAO.add(orwell);
-        Auteur victorhugo = new Auteur("Victor Hugo", LocalDate.of(1802,2,26), "1885-05-22");
-        this.auteurDAO.add(victorhugo);
-        Auteur sansLivre = new Auteur("Auteur Sans Livre", LocalDate.of(1900,1,1));
-
     }
 
     @Override
