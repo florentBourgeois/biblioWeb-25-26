@@ -27,44 +27,10 @@ public class BibliothequeController {
     public BibliothequeController(AuteurService auteurService, LivreService livreService) {
         this.auteurService = auteurService;
         this.livreService = livreService;
-        /*
-        Auteur jkr = auteurService.detailsAuteur(1);
-        Livre harryp = new Livre(jkr, 2000, "harry potter", "3456776543");
-        livres.add(harryp);
-        livres.add(new Livre(jkr, 2002, "harry potter2", "3456776543"));
-        livres.add(new Livre(jkr, 2003, "harry potter3", "3456776543"));
-        livres.add(new Livre(jkr, 2007, "harry potter5", "3456776543"));
 
-        Auteur fred = auteurService.detailsAuteur(1);
-        livres.add(new Livre(fred, 1800, "ce livre", "345677YG"));
 
-        livres.add(new Livre(auteurService.detailsAuteur(2), 1932, "Le Meilleur des mondes", "9782266165875"));
-        livres.add(new Livre(auteurService.detailsAuteur(3), 1949, "1984", "9780451524935"));
-        livres.add(new Livre(auteurService.detailsAuteur(4), 1862, "Les Misérables", "9782070409185"));
-        livres.add(new Livre(auteurService.detailsAuteur(4), 1831, "Le Bossu de Notre-Dame", "9782070409192"));
-        livres.add(new Livre(auteurService.detailsAuteur(4), 1856, "Les Travailleurs de la mer", "9782070409208"));
 
-        Membre m1 = new Membre("Florent", "2001");
-        Membre m2 = new Membre("Sans Emprunt", "2020");
-        Membre m3 = new Membre("Jack", "1922");
-        Membre m4 = new Membre("Mike", "2026");
-        Membre m5 = new Membre("Harry", "2026");
 
-        m1.getEmprunts().add(livres.get(6));
-        m1.getEmprunts().add(livres.get(9));
-
-        m5.getEmprunts().add(livres.get(0));
-        m5.getEmprunts().add(livres.get(2));
-        m5.getEmprunts().add(livres.get(3));
-        m5.getEmprunts().add(livres.get(4));
-
-        this.membres.add(m1);
-        this.membres.add(m2);
-        this.membres.add(m3);
-        this.membres.add(m4);
-        this.membres.add(m5);
-
-        */
 
         System.out.println("-------------------------------\nBibliothequeController initialisé avec " + this.livreService.getNumberLivres() + " livres et " + this.auteurService.nombreAuteurs() + " auteurs.\n-------------------------------");
     }
