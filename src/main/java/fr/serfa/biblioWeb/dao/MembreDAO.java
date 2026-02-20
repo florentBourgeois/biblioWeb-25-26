@@ -18,6 +18,6 @@ public interface MembreDAO extends JpaRepository<Membre, Long> {
     @Query("select emprunts from Membre where id=:id")
     List<Livre> findEmpruntById(Long id);
 
-
+    // trouver l'emprunteur d'un livre
 
 }
