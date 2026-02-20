@@ -4,17 +4,12 @@ import fr.serfa.biblioWeb.model.Auteur;
 import fr.serfa.biblioWeb.model.Livre;
 import fr.serfa.biblioWeb.model.Membre;
 import fr.serfa.biblioWeb.services.AuteurService;
-import fr.serfa.biblioWeb.services.AuteurServiceImp;
 import fr.serfa.biblioWeb.services.LivreService;
 import fr.serfa.biblioWeb.services.MembreService;
-import jakarta.websocket.server.PathParam;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.*;
 
 @RestController
@@ -119,14 +114,14 @@ public class BibliothequeController {
 
     // pourquoi ca ne marche pas ?
     @GetMapping("/admin/livres/{idLivre}/emprunteur")
-    public Membre emprunteurDe(@PathVariable int idLivre){
+    public Membre emprunteurDe(@PathVariable Long idLivre){
         //TODO a mettre dnas le service
-        /*Livre cherche = this.livres.get(idLivre);
+        Livre cherche = this.livreService.getById(idLivre);
         for (Membre m : this.membreService.getAllMembres()){
                 if (m.getEmprunts().contains(cherche)){
                     return m;
             }
-        }*/
+        }
         return null;
     }
 
@@ -144,11 +139,24 @@ public class BibliothequeController {
         return null;
     }
 
+
+    @GetMapping
+
+    @PostMapping("/livres")
+    public Livre ajouterLivre(@RequestBody LivreAAjouterDTO_Record livreAajouterDTO){
+        Auteur auteurDuLivre = auteurService.detailsAuteur((int) livreAajouterDTO.auteurID());
+
+        Livre l = new Livre(auteurDuLivre, livreAajouterDTO.anneePublication(), livreAajouterDTO.titre(), livreAajouterDTO.isbn());
+        livreService.add(l);
+
+        return l;
+    }
+
     @PatchMapping("/admin/membre/{idMembre}/emprunter/livres/{idLivre}")
-    public ResponseEntity<Object> emprunterLivre(@PathVariable Long idMembre, @PathVariable int idLivre){
+    public ResponseEntity<Object> emprunterLivre(@PathVariable Long idMembre, @PathVariable Long idLivre){
         //TODO a mettre dnas le service
-/*        Membre m = this.membreService.getParID(id);
-        Livre l = this.livres.get(idLivre);
+        Membre m = this.membreService.getParID(idMembre);
+        Livre l = this.livreService.getById(idLivre);
         if(this.livresDisponibles().contains(l)) {
             m.getEmprunts().add(l);
             // permet de renvoyer un code 200 et le livre emprunté
@@ -158,9 +166,7 @@ public class BibliothequeController {
         body.put("message","livre emprunté");
         // permet de renvoyer un code 409 et un message à prendre en compte
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);
-        */
 
-        return null;
     }
     // TODO : reprendre la route /livres/{id} et renvoyer 404 si l'id n'existe pas
 
