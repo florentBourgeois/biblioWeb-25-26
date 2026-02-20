@@ -95,9 +95,9 @@ public class BibliothequeController {
     }
 
     @GetMapping("/admin/membres/forList")
-    public List<MembreSansPassword>  getMembresSansPassword(){
+    public List<MembreSansPasswordDTO>  getMembresSansPassword(){
         List<Membre> tousLesMembres = this.membreService.getAllMembres();
-        List<MembreSansPassword> result = tousLesMembres.stream().map(MembreSansPassword::fromMembre).toList();
+        List<MembreSansPasswordDTO> result = tousLesMembres.stream().map(MembreSansPasswordDTO::fromMembre).toList();
         // meme chose que  :
         /*
             for (Membre m : tousLesMembres){
@@ -109,7 +109,7 @@ public class BibliothequeController {
     }
 
     @GetMapping("/admin/membres/forListDansBDD")
-    public List<MembreSansPassword>  getMembresSansPasswordDansBDD(){
+    public List<MembreSansPasswordDTO>  getMembresSansPasswordDansBDD(){
         return this.membreService.getAllMembreSansPassword();
     }
 
@@ -160,12 +160,12 @@ public class BibliothequeController {
 
 
     @GetMapping("/livres/forList")
-    public List<LivrePourListe> getLivresPourList(){
+    public List<LivrePourListeDTO> getLivresPourList(){
         List<Livre> tousLesLivres = livreService.getAll();
 
-        List<LivrePourListe> result = new ArrayList<>();
+        List<LivrePourListeDTO> result = new ArrayList<>();
         for (Livre l : tousLesLivres){
-            LivrePourListe aAjouter = new LivrePourListe(l.getIsbn(), l.getAuteur().getNom(), l.getTitre(), l.getAnneePublication());
+            LivrePourListeDTO aAjouter = new LivrePourListeDTO(l.getIsbn(), l.getAuteur().getNom(), l.getTitre(), l.getAnneePublication());
             result.add(aAjouter);
         }
 
