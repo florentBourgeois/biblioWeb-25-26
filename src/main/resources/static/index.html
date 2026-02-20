@@ -105,7 +105,7 @@
         const errorMsg = document.getElementById('error-message');
         const container = document.getElementById('livres-container');
 
-            const response = await fetch('http://localhost:8080/livres/short');
+            const response = await fetch('http://localhost:8080/livres/forList');
 
 
             const livres = await response.json();
@@ -117,7 +117,7 @@
                 return;
             }
 
-            listeExemple.forEach(livre => {
+            livres.forEach(livre => {
                 const card = document.createElement('div');
                 card.classList.add('card');
 
@@ -135,7 +135,7 @@
 
     let listeExemple = [];
     for (let i = 0; i < 10; i++) {
-        listeExemple.push({"id": i, "titre": "titre"+i, "autheurID": i+100, "isbn": "isbn"+i});
+        listeExemple.push({"id": i, "titre": "titre"+i, "nomAuteur": "fred" +i+100, "isbn": "isbn"+i, "anneePublication": 2000});
     }
 
     chargerLivres();

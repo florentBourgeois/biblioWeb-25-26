@@ -19,6 +19,8 @@ public class Membre {
 
     private String nom;
     private String dateAbonnement = "";
+    private String password = "choucroute,@perdue";
+
     @OneToMany
     private List<Livre> emprunts = new ArrayList<>();
 

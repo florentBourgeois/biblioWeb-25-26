@@ -140,7 +140,18 @@ public class BibliothequeController {
     }
 
 
-    @GetMapping
+    @GetMapping("/livres/forList")
+    public List<LivrePourListe> getLivresPourList(){
+        List<Livre> tousLesLivres = livreService.getAll();
+
+        List<LivrePourListe> result = new ArrayList<>();
+        for (Livre l : tousLesLivres){
+            LivrePourListe aAjouter = new LivrePourListe(l.getIsbn(), l.getAuteur().getNom(), l.getTitre(), l.getAnneePublication());
+            result.add(aAjouter);
+        }
+
+        return result;
+    }
 
     @PostMapping("/livres")
     public Livre ajouterLivre(@RequestBody LivreAAjouterDTO_Record livreAajouterDTO){
