@@ -16,10 +16,5 @@ public interface AuteurDAO {
     // si mon stockage est inteligent / peut filtrer
     public List<Auteur> findByNom(String nom);
 
-
-
-
-
-
-
+    void deleteById(Long id);
 }

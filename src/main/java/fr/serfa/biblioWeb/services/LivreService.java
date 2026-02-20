@@ -1,6 +1,6 @@
 package fr.serfa.biblioWeb.services;
 
-import fr.serfa.biblioWeb.manga.dao.LivreDAO;
+import fr.serfa.biblioWeb.dao.LivreDAO;
 import fr.serfa.biblioWeb.model.Livre;
 import net.datafaker.Faker;
 import org.springframework.stereotype.Service;
@@ -46,6 +46,8 @@ public class LivreService {
     }
 
     public  int getNumberLivres(){
+
+        livreDAO.deleteById(1L);
         return livreDAO.findAll().size();
     }
 

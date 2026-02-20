@@ -398,7 +398,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/admin/livres/dispoible",
+              "raw": "http://localhost:8080/admin/livres/disponibles",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -407,7 +407,7 @@
               "path": [
                 "admin",
                 "livres",
-                "dispoible"
+                "disponibles"
               ]
             }
           },

@@ -41,4 +41,9 @@ public class AuteurDAO_List implements AuteurDAO{
         }
         return result;
     }
+
+    @Override
+    public void deleteById(Long id) {
+        this.auteurs.remove(id);
+    }
 }

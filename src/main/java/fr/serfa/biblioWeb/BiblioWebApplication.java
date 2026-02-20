@@ -1,8 +1,8 @@
 package fr.serfa.biblioWeb;
 
 import fr.serfa.biblioWeb.dao.AuteurDAO;
-import fr.serfa.biblioWeb.manga.dao.LivreDAO;
-import fr.serfa.biblioWeb.manga.dao.MembreDAO;
+import fr.serfa.biblioWeb.dao.LivreDAO;
+import fr.serfa.biblioWeb.dao.MembreDAO;
 import fr.serfa.biblioWeb.model.Auteur;
 import fr.serfa.biblioWeb.model.Livre;
 import fr.serfa.biblioWeb.model.Membre;
@@ -13,10 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Locale;
 import java.util.Optional;
-import java.util.Set;
 
 @SpringBootApplication
 public class BiblioWebApplication {
@@ -101,7 +98,7 @@ public class BiblioWebApplication {
 			System.out.println("\n\tInitialisation des membres\n---------------");
 
 			Membre m1 = new Membre("Florent", "2001");
-			Membre m2 = new Membre("Sans Emprunt", "2020");
+			Membre sansEmprunt = new Membre("Sans Emprunt", "2020");
 			Membre m3 = new Membre("Jack", "1922");
 			Membre mRandom = new Membre("random", "2026");
 			Membre mHarry = new Membre("Harry", "2026");
@@ -127,7 +124,7 @@ public class BiblioWebApplication {
 
 
 			membreDAO.save(m1);
-			membreDAO.save(m2);
+			membreDAO.save(sansEmprunt);
 			membreDAO.save(m3);
 			membreDAO.save(mRandom);
 			membreDAO.save(mHarry);

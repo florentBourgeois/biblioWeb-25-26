@@ -6,6 +6,7 @@ import fr.serfa.biblioWeb.model.Membre;
 import fr.serfa.biblioWeb.services.AuteurService;
 import fr.serfa.biblioWeb.services.AuteurServiceImp;
 import fr.serfa.biblioWeb.services.LivreService;
+import fr.serfa.biblioWeb.services.MembreService;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -22,12 +23,12 @@ public class BibliothequeController {
 
     private AuteurService auteurService ;
     private LivreService livreService;
-    private List<Membre> membres = new ArrayList<>();
+    private MembreService membreService;
 
-    public BibliothequeController(AuteurService auteurService, LivreService livreService) {
+    public BibliothequeController(AuteurService auteurService, LivreService livreService, MembreService membreService) {
         this.auteurService = auteurService;
         this.livreService = livreService;
-
+        this.membreService = membreService;
 
 
 
@@ -95,12 +96,12 @@ public class BibliothequeController {
 
     @GetMapping("/admin/membres")
     public List<Membre>  getMembres(){
-        return this.membres;
+        return this.membreService.getAllMembres();
     }
 
     @GetMapping("/admin/membres/{id}/livres")
-    public List<Livre> livresEmpruntesPar(@PathVariable  int id){
-        Membre m = this.membres.get(id);
+    public List<Livre> livresEmpruntesPar(@PathVariable  Long id){
+        Membre m = this.membreService.getParID(id);
         return m.getEmprunts();
     }
 
@@ -108,7 +109,7 @@ public class BibliothequeController {
     public List<Livre> livresDisponibles(){
         //TODO a mettre dans le service
         List<Livre> result = new ArrayList<>();
-        for (Membre m : this.membres){
+        for (Membre m : this.membreService.getAllMembres()){
             for (Livre l : m.getEmprunts()){
                 result.remove(l);
             }
@@ -121,7 +122,7 @@ public class BibliothequeController {
     public Membre emprunteurDe(@PathVariable int idLivre){
         //TODO a mettre dnas le service
         /*Livre cherche = this.livres.get(idLivre);
-        for (Membre m : this.membres){
+        for (Membre m : this.membreService.getAllMembres()){
                 if (m.getEmprunts().contains(cherche)){
                     return m;
             }
@@ -144,9 +145,9 @@ public class BibliothequeController {
     }
 
     @PatchMapping("/admin/membre/{idMembre}/emprunter/livres/{idLivre}")
-    public ResponseEntity<Object> emprunterLivre(@PathVariable int idMembre, @PathVariable int idLivre){
+    public ResponseEntity<Object> emprunterLivre(@PathVariable Long idMembre, @PathVariable int idLivre){
         //TODO a mettre dnas le service
-/*        Membre m = this.membres.get(idMembre);
+/*        Membre m = this.membreService.getParID(id);
         Livre l = this.livres.get(idLivre);
         if(this.livresDisponibles().contains(l)) {
             m.getEmprunts().add(l);
