@@ -94,6 +94,11 @@ public class BibliothequeController {
         return this.membreService.getAllMembres();
     }
 
+    @GetMapping("/admin/membres/forList")
+    public List<Membre>  getMembresSansPassword(){
+        return this.membreService.getAllMembres();
+    }
+
     @GetMapping("/admin/membres/{id}/livres")
     public List<Livre> livresEmpruntesPar(@PathVariable  Long id){
         Membre m = this.membreService.getParID(id);
