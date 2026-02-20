@@ -113,10 +113,22 @@ public class BibliothequeController {
         return this.membreService.getAllMembreSansPassword();
     }
 
+    @GetMapping("/admin/membres/avecEmprunt")
+    public List<Membre>  getMembresAvecEmprunt(){
+        return this.membreService.getAllMembreAvecEmprunt();
+    }
+
+
+
     @GetMapping("/admin/membres/{id}/livres")
     public List<Livre> livresEmpruntesPar(@PathVariable  Long id){
         Membre m = this.membreService.getParID(id);
         return m.getEmprunts();
+    }
+
+    @GetMapping("/admin/membres/{id}/livresFromBDD")
+    public List<Livre> livresEmpruntesParFromBDD(@PathVariable  Long id){
+        return this.membreService.getEmpruntDe(id);
     }
 
     @GetMapping ("/livres/disponibles")

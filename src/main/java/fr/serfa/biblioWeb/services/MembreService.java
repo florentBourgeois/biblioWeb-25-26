@@ -2,6 +2,7 @@ package fr.serfa.biblioWeb.services;
 
 import fr.serfa.biblioWeb.controller.MembreSansPasswordDTO;
 import fr.serfa.biblioWeb.dao.MembreDAO;
+import fr.serfa.biblioWeb.model.Livre;
 import fr.serfa.biblioWeb.model.Membre;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,14 @@ public class MembreService {
 
     public List<MembreSansPasswordDTO> getAllMembreSansPassword(){
         return this.membreDAO.findAllSansPassword();
+    }
+
+    public List<Membre> getAllMembreAvecEmprunt(){
+        return this.membreDAO.findByEmprunts_IdNotNull();
+    }
+
+    public List<Livre> getEmpruntDe(Long id){
+        return this.membreDAO.findEmpruntById(id);
     }
 
 }
