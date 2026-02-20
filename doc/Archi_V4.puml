@@ -15,8 +15,9 @@ note top : BibliothequeController utilise un service dédié à la gestion des a
 BibliothequeController -> LivreService
 BibliothequeController --> AuteurService
 
-MembreDAO <-- MembreService
-MembreService <-- BibliothequeController
+interface MembreDAO{}
+'MembreDAO <-- MembreService
+'MembreService <-- BibliothequeController
 MembreService .> Membre : utilise
 
 LivreService --> LivreDAO
