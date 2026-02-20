@@ -95,8 +95,22 @@ public class BibliothequeController {
     }
 
     @GetMapping("/admin/membres/forList")
-    public List<Membre>  getMembresSansPassword(){
-        return this.membreService.getAllMembres();
+    public List<MembreSansPassword>  getMembresSansPassword(){
+        List<Membre> tousLesMembres = this.membreService.getAllMembres();
+        List<MembreSansPassword> result = tousLesMembres.stream().map(MembreSansPassword::fromMembre).toList();
+        // meme chose que  :
+        /*
+            for (Membre m : tousLesMembres){
+            MembreSansPassword aAjouter  = MembreSansPassword.fromMembre(m);
+            result.add(aAjouter);
+        }
+         */
+        return result;
+    }
+
+    @GetMapping("/admin/membres/forListDansBDD")
+    public List<MembreSansPassword>  getMembresSansPasswordDansBDD(){
+        return this.membreService.getAllMembreSansPassword();
     }
 
     @GetMapping("/admin/membres/{id}/livres")

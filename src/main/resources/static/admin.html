@@ -109,6 +109,8 @@
 
 
             const membres = await response.json();
+            console.dir(membres);
+
             if(membres[0].password) {
                 container.innerHTML = '<p style="text-align:center;color:#888;">LES PASSWORD DES MEMBRES SONT LISIBLES.  ALERTE !!! </p>';
                 return

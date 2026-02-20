@@ -203,6 +203,26 @@
           "response": []
         },
         {
+          "name": "liste des livres avec moins d'infos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/livres/forList",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "livres",
+                "forList"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "livre par id 1",
           "request": {
             "method": "GET",
@@ -371,6 +391,27 @@
           "response": []
         },
         {
+          "name": "liste membres sans password",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/admin/membres/forList",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "admin",
+                "membres",
+                "forList"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "emprunt membre 1",
           "request": {
             "method": "GET",
@@ -437,6 +478,37 @@
         },
         {
           "name": "ajouter livre à l'auteur 1",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"titre\" : \"Almanach des monstres magiques\",\n    \"anneePublication\": 2010,\n    \"isbn\": \"1234567890123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/admin/autheur/1/livres",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "admin",
+                "autheur",
+                "1",
+                "livres"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ajouter livre v2",
           "request": {
             "method": "POST",
             "header": [],
